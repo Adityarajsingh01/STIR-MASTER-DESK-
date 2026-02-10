@@ -136,3 +136,26 @@ fig.add_trace(go.Scatter(x=data.index, y=data['Net Liquidity (SMA5)'], name="Net
 fig.update_layout(height=900, title_text="Institutional Market Dashboard", hovermode="x unified", margin=dict(l=20, r=20, t=60, b=20), legend=dict(orientation="h", y=1.01, xanchor="right", x=1))
 
 st.plotly_chart(fig, use_container_width=True)
+# --- 4. DATA EXPORT & GRID ---
+st.divider()
+
+# 1. Prepare Data for Download (CSV opens in Excel)
+csv = data.to_csv().encode('utf-8')
+
+with st.expander("📋 View Raw Data & Export", expanded=False):
+    
+    # The Excel/CSV Download Button
+    st.download_button(
+        label="📥 Download Data to Excel (CSV)",
+        data=csv,
+        file_name=f'STIR_Data_{datetime.date.today()}.csv',
+        mime='text/csv',
+    )
+    
+    # The Interactive Data Table
+    # We use st.dataframe instead of .style so you can sort/filter columns
+    st.dataframe(
+        data.sort_index(ascending=False),
+        use_container_width=True,
+        height=400
+    )
