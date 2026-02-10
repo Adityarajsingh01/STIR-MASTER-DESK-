@@ -62,7 +62,10 @@ with st.sidebar:
     
     # Arb Selector
     st.subheader("Arb Monitor")
-    rates_list = ['IORB', 'EFFR', 'SOFR', 'Target Upper', 'RRP Rate']
+    
+    # <--- UPDATED LIST: Added 'Target Lower'
+    rates_list = ['IORB', 'EFFR', 'SOFR', 'Target Upper', 'Target Lower', 'RRP Rate']
+    
     long_leg = st.selectbox("Long (Earn)", rates_list, index=0)
     short_leg = st.selectbox("Short (Pay)", rates_list, index=1)
 
